@@ -26,14 +26,19 @@
                 <li><a href="#acerca">Acerca de Nosotros</a></li>
                 <li><a href="videos.html">Más Información</a></li>
             </ul>
+            <div class="nav-auth">
+                <div id="g_id_onload"
+                    data-client_id="454547559124-snfjl9r14att0fic1bvc9dkcif45o3dl.apps.googleusercontent.com"
+                    data-callback="handleCredentialResponse">
+                </div>
+                <div class="g_id_signin" data-type="standard"></div>
+                <div class="user-info" id="user-info" style="display: none;">
+                    <img class="user-avatar" alt="Usuario">
+                    <span class="user-name"></span>
+                    <button class="logout-btn" onclick="logout()">Salir</button>
+                </div>
+            </div>
         </div>
-
-        <div id="g_id_onload"
-            data-client_id="454547559124-snfjl9r14att0fic1bvc9dkcif45o3dl.apps.googleusercontent.com"
-            data-callback="handleCredentialResponse">
-        </div>
-
-        <div class="g_id_signin" data-type="standard"></div>
 
     </nav>
 

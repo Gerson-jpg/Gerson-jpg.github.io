@@ -61,6 +61,18 @@ async function handleCredentialResponse(response) {
             // Update UI to show user is logged in
             updateUserInterface(userData);
 
+            // Hide Google Sign-In button and show user info
+            const signInButton = document.querySelector('.g_id_signin');
+            const userInfoDiv = document.getElementById('user-info');
+            if (signInButton && userInfoDiv) {
+                signInButton.style.display = 'none';
+                userInfoDiv.style.display = 'flex';
+                const avatarImg = userInfoDiv.querySelector('.user-avatar');
+                const userNameSpan = userInfoDiv.querySelector('.user-name');
+                if (avatarImg) avatarImg.src = userData.picture;
+                if (userNameSpan) userNameSpan.textContent = userData.name;
+            }
+
             // Optional: Redirect to a protected page or show success message
             console.log('Usuario autenticado exitosamente:', userData.name);
             alert(`¡Bienvenido, ${userData.name}!`);
@@ -159,7 +171,36 @@ function checkUserSession() {
     const userData = localStorage.getItem('user');
     if (userData) {
         const user = JSON.parse(userData);
-        updateUserInterface(user);
+
+        // Hide Google Sign-In button and show user info
+        const signInButton = document.querySelector('.g_id_signin');
+        const userInfoDiv = document.getElementById('user-info');
+        if (signInButton && userInfoDiv) {
+            signInButton.style.display = 'none';
+            userInfoDiv.style.display = 'flex';
+            const avatarImg = userInfoDiv.querySelector('.user-avatar');
+            const userNameSpan = userInfoDiv.querySelector('.user-name');
+            if (avatarImg) avatarImg.src = user.picture;
+            if (userNameSpan) userNameSpan.textContent = user.name;
+        }
+
         console.log('Sesión activa para:', user.name);
     }
+}
+
+// Function to logout user
+function logout() {
+    // Remove user data from localStorage
+    localStorage.removeItem('user');
+
+    // Hide user info and show Google Sign-In button
+    const signInButton = document.querySelector('.g_id_signin');
+    const userInfoDiv = document.getElementById('user-info');
+    if (signInButton && userInfoDiv) {
+        signInButton.style.display = 'block';
+        userInfoDiv.style.display = 'none';
+    }
+
+    console.log('Usuario cerró sesión');
+    alert('Has cerrado sesión exitosamente');
 }

@@ -31,6 +31,57 @@ body {
     padding: 0 20px;
 }
 
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-name {
+    color: white;
+    font-weight: 500;
+    font-size: 0.9em;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.logout-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
 .nav-logo {
     display: flex;
     align-items: center;
@@ -326,11 +377,34 @@ body {
         flex-direction: row;
         padding: 10px 15px;
     }
-    
+
+    .nav-auth {
+        gap: 10px;
+    }
+
+    .user-info {
+        padding: 6px 10px;
+    }
+
+    .user-avatar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .user-name {
+        font-size: 0.85em;
+        max-width: 100px;
+    }
+
+    .logout-btn {
+        padding: 3px 6px;
+        font-size: 0.75em;
+    }
+
     .hamburger {
         display: flex;
     }
-    
+
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -344,22 +418,22 @@ body {
         display: none;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
-    
+
     .nav-menu.active {
         display: flex;
     }
-    
+
     .nav-menu li {
         width: 100%;
     }
-    
+
     .nav-menu a {
         padding: 15px;
         text-align: center;
         border-radius: 0;
         border-bottom: 1px solid rgba(0, 123, 255, 0.1);
     }
-    
+
     .logo {
         height: 50px;
     }
