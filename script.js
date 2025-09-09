@@ -64,13 +64,28 @@ async function handleCredentialResponse(response) {
             // Hide Google Sign-In button and show user info
             const signInButton = document.querySelector('.g_id_signin');
             const userInfoDiv = document.getElementById('user-info');
+
+            console.log('Sign-in button found:', !!signInButton);
+            console.log('Sign-in button element:', signInButton);
+            console.log('Sign-in button classes:', signInButton ? signInButton.className : 'N/A');
+            console.log('User info div found:', !!userInfoDiv);
+            console.log('User info div element:', userInfoDiv);
+
             if (signInButton && userInfoDiv) {
                 signInButton.style.display = 'none';
                 userInfoDiv.style.display = 'flex';
                 const avatarImg = userInfoDiv.querySelector('.user-avatar');
                 const userNameSpan = userInfoDiv.querySelector('.user-name');
+
+                console.log('Avatar img found:', !!avatarImg);
+                console.log('User name span found:', !!userNameSpan);
+
                 if (avatarImg) avatarImg.src = userData.picture;
                 if (userNameSpan) userNameSpan.textContent = userData.name;
+
+                console.log('User data applied:', userData.name, userData.picture);
+            } else {
+                console.error('Could not find required DOM elements');
             }
 
             // Optional: Redirect to a protected page or show success message
@@ -114,7 +129,6 @@ async function verifyTokenWithServer(idToken) {
         // Fallback: Para desarrollo/testing, puedes descomentar las líneas abajo
         // pero NUNCA uses esto en producción
 
-        /*
         // ⚠️ SOLO PARA DESARROLLO - NO USAR EN PRODUCCIÓN ⚠️
         console.warn('Usando verificación del cliente - SOLO PARA DESARROLLO');
         const responsePayload = decodeJwtResponse(idToken);
@@ -127,9 +141,8 @@ async function verifyTokenWithServer(idToken) {
                 sub: responsePayload.sub
             }
         };
-        */
 
-        throw error;
+        // throw error; // Comentado para desarrollo
     }
 }
 
@@ -144,47 +157,46 @@ function decodeJwtResponse(token) {
     return JSON.parse(jsonPayload);
 }
 
-// Function to update UI after successful login
 function updateUserInterface(user) {
-    // You can customize this function to update your UI
-    // For example, hide the sign-in button and show user info
-    const signInButton = document.querySelector('.g_id_signin');
-    if (signInButton) {
-        signInButton.style.display = 'none';
-    }
-
-    // Optionally add user info display
-    const navContainer = document.querySelector('.nav-container');
-    if (navContainer && user) {
-        const userInfo = document.createElement('div');
-        userInfo.className = 'user-info';
-        userInfo.innerHTML = `
-            <img src="${user.picture}" alt="${user.name}" class="user-avatar">
-            <span class="user-name">${user.name}</span>
-        `;
-        navContainer.appendChild(userInfo);
-    }
+    // This function is no longer used for UI update since we handle it in handleCredentialResponse and checkUserSession
+    // You can remove this function if not used elsewhere
 }
 
 // Function to check if user is already logged in on page load
 function checkUserSession() {
+    console.log('Checking user session...');
     const userData = localStorage.getItem('user');
+    console.log('User data from localStorage:', userData);
+
     if (userData) {
         const user = JSON.parse(userData);
+        console.log('Parsed user data:', user);
 
         // Hide Google Sign-In button and show user info
         const signInButton = document.querySelector('.g_id_signin');
         const userInfoDiv = document.getElementById('user-info');
+
+        console.log('Session check - Sign-in button found:', !!signInButton);
+        console.log('Session check - User info div found:', !!userInfoDiv);
+
         if (signInButton && userInfoDiv) {
             signInButton.style.display = 'none';
             userInfoDiv.style.display = 'flex';
             const avatarImg = userInfoDiv.querySelector('.user-avatar');
             const userNameSpan = userInfoDiv.querySelector('.user-name');
+
+            console.log('Session check - Avatar img found:', !!avatarImg);
+            console.log('Session check - User name span found:', !!userNameSpan);
+
             if (avatarImg) avatarImg.src = user.picture;
             if (userNameSpan) userNameSpan.textContent = user.name;
-        }
 
-        console.log('Sesión activa para:', user.name);
+            console.log('Session restored for user:', user.name);
+        } else {
+            console.error('Session check - Could not find required DOM elements');
+        }
+    } else {
+        console.log('No user session found');
     }
 }
 
